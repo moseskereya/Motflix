@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity,  Dimensions, ScrollView, Image, Touchable
 
 const {width, height} = Dimensions.get('window')
 const movieList = ({data, title}) => {
+  const baseUrl = "https://image.tmdb.org/t/p/original/"
   return (
     <View className="mb-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
@@ -12,18 +13,19 @@ const movieList = ({data, title}) => {
        </TouchableOpacity>
       </View>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingHorizontal: 15}}>
-        {data.map((movie, index) => {
+        {data?.map((movie, index) => {
           return (
               <TouchableWithoutFeedback key={index}>
                 <View className="space-y-2 mr-4">
-                <Image source={require('../images/moviesimg.jpg')} 
+                <Image source={{uri:`${baseUrl}/${movie.poster_path}`}} 
                   style={{
                     width: width * 0.33,
                     height: height * 0.22,
                   }}
-                className="rounded-3xl"
-              />
-            <Text className="text-neutral-300 ml-1">The A Team</Text>
+                className="rounded-3xl"/>
+               <Text className='text-white ml-1'>
+                     {movie.title?.length > 22? movie.title.slice(0,22)+'...' : movie.title}
+                  </Text>
               </View>
             </TouchableWithoutFeedback>
           )

@@ -11,7 +11,7 @@ const trendingmovies = ({data}) => {
     }
   return (
     <View className="mb-8"> 
-        <Text className="text-white text-xl mx-4 mb-5">Trending Movies</Text>
+        <Text className="text-white text-md mx-4 mb-5">Trending Movies</Text>
         <Carousel data={data} 
         renderItem={({item}) => <MovieCard item={item} handleClick={handleClick} />}  
         firstItem={1}
@@ -24,12 +24,13 @@ const trendingmovies = ({data}) => {
   )
 }
 
-export default trendingmovies
+export default trendingmovies;
 
 const MovieCard = ({item, handleClick}) => {
+  const baseUrl = "https://image.tmdb.org/t/p/original/"
     return(
     <TouchableNativeFeedback onPress={() => handleClick(item)}>
-        <Image source={require('../images/moviesimg.jpg')} 
+        <Image source={{uri:`${baseUrl}/${item.poster_path}`}} 
            style={{
              width: width * 0.6,
              height: height * 0.4,

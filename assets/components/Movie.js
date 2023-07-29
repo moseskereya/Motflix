@@ -1,13 +1,23 @@
-import { View, Text, ScrollView, TouchableOpacity, Dimensions, Image} from 'react-native'
+import { View, Text, ScrollView, Dimensions, Image} from 'react-native'
 import { useRoute } from '@react-navigation/native'
-import React, { useEffect } from 'react'
+import React, {  useState , useEffect} from 'react'
+import Cast from './Cast'
 const {width, height} = Dimensions.get('window')
 
 const Movie = () => {
  const {params: item} = useRoute();
+ const [cast, setcast] = useState({})
+ const [movie, setmovie] = useState({})
  useEffect(() => {
-    //this will fetch an pi from the mmdb movies
- }, [item])
+  const api_key = "fa1875db1f08a7d5f9887db721a0a94e"
+  const movie_Id = item.id;
+  fetch(`https://api.themoviedb.org/3/movie/${movie_Id}?api_key=${api_key}&append_to_response=videos,images,credits`)
+    .then(response => response.json())
+    .then((data) => setmovie(data))
+    console.log(movie)
+ }, [itemId])
+
+
   return (
     <View  contentContainerStyle={{paddingBottom:20}} className="flex-1 bg-neutral-900">
      <ScrollView>
@@ -28,6 +38,7 @@ const Movie = () => {
         In the thrilling action-adventure film "A Tem Movie," a young archaeologist, Dr. Amelia Turner, stumbles upon an ancient artifact rumored to possess mystical powers capable of reshaping the world. Obsessed with discovering its secrets, Amelia embarks on an epic journey across uncharted territories and perilous landscapes.
         </Text>
        </View>
+       <Cast cast={cast}/>
      </ScrollView>
     </View>
   )

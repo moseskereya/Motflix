@@ -1,9 +1,9 @@
-import React,  { useEffect } from 'react'
+import React,  { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity,  Dimensions, ScrollView, Image, TouchableWithoutFeedback } from 'react-native'
+import { fallbackMoviePoster, image185 } from '../../api/movidb'
 
 const {width, height} = Dimensions.get('window')
 const movieList = ({data, title}) => {
-  const baseUrl = "https://image.tmdb.org/t/p/original/"
   return (
     <View className="mb-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
@@ -17,7 +17,7 @@ const movieList = ({data, title}) => {
           return (
               <TouchableWithoutFeedback key={index}>
                 <View className="space-y-2 mr-4">
-                <Image source={{uri:`${baseUrl}/${movie.poster_path}`}} 
+                <Image source={{uri: image185(movie.poster_path) || fallbackMoviePoster}} 
                   style={{
                     width: width * 0.33,
                     height: height * 0.22,

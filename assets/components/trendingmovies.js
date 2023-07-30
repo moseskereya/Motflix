@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Text, Dimensions, Image, TouchableNativeFeedback} from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 import { useNavigation } from '@react-navigation/native'
+import { fallbackMoviePoster, image500 } from '../../api/movidb'
 const {width, height} = Dimensions.get('window')
 
 const trendingmovies = ({data}) => {
@@ -27,10 +28,9 @@ const trendingmovies = ({data}) => {
 export default trendingmovies;
 
 const MovieCard = ({item, handleClick}) => {
-  const baseUrl = "https://image.tmdb.org/t/p/original/"
     return(
     <TouchableNativeFeedback onPress={() => handleClick(item)}>
-        <Image source={{uri:`${baseUrl}/${item.poster_path}`}} 
+        <Image  source={{uri: image500(item.poster_path) || fallbackMoviePoster}} 
            style={{
              width: width * 0.6,
              height: height * 0.4,

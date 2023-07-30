@@ -39,6 +39,7 @@ const Movies = () => {
         const data = await fetchUpcomming();
         if(data && data.results) setUpcoming(data.results)
     }
+
     const getToprated = async () => {
         const data = await fetchTopRatedMovies();
         if(data && data.results) setToprated(data.results)
@@ -53,6 +54,7 @@ const Movies = () => {
         const data = await fetchcomedymoviesEndpoint();
         if(data && data.results) setcomedy(data.results)
     }
+
     const getHoro = async () => {
         const data = await fetchhoromoviesEndpoint();
         if(data && data.results) sethoro(data.results)
@@ -62,11 +64,11 @@ const Movies = () => {
         const data = await fetchromanticmoviesEndpoint();
         if(data && data.results) setromantic(data.results)
     }
+
     const getDocumentaries = async () => {
         const data = await fetchdocumentariemoviesEndpoint();
         if(data && data.results) setdocumentaries(data.results)
     }
-
 
 
   return (

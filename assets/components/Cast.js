@@ -1,37 +1,37 @@
-import { View, Text , Dimensions, SafeAreaView, TextInput, Image ,TouchableOpacity, ScrollView, TouchableWithoutFeedback} from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-const {width, height} = Dimensions.get('window')
-
-const Cast = ({cast}) => {
-    const moviename = "The A Team ghrilrtblruiglgubrgyrgbruygb"
-    const navigation = useNavigation();
-    
+import { View, Text , Dimensions, SafeAreaView, Image ,TouchableOpacity, ScrollView} from 'react-native'
+import { fallbackPersonImage, image185 } from '../../api/movidb'
+const Cast = ({cast, navigation}) => {
   return (
-    <SafeAreaView className="bg-neutral-800 flex-1">
+    <View  className="my-6">
+         <Text className="text-white text-lg mx-4 mb-5">Top Cast</Text>
+        <ScrollView 
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{paddingHorizontal: 15}}
+        >
         {cast.length> 0 ? (
-              <ScrollView showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{paddingHorizontal: 15}} className="space-y-3">
               <View className="flex-row justify-between flex-wrap">
-                  {cast.map((item, index) => {
+                  {cast.map((person, index) => {
                   return(
-                      <TouchableWithoutFeedback key={index} onPress={() => navigation.push('Movie', item)}>
-                          <View className="space-y-2 mb-4">
-                              <Image className="rounded-3xl" style={{ width: width*0.44, height: height* 0.22}} source ={require('../images/moviesimg.jpg')}/> 
-                              <Text className='text-white ml-1'>
-                                  {moviename.length > 22? moviename.slice(0,22)+'...' : moviename}
-                              </Text>
+                    <TouchableOpacity key={index} onPress={()=> navigation.navigate('Person', person)} className="mr-4 items-center">
+                          <View className="overflow-hidden rounded-full h-20 w-20 items-center border border-neutral-500">
+                              <Image  className="rounded-2xl h-24 w-20" source={{uri: image185(person?.profile_path) || fallbackPersonImage}} /> 
                           </View>
-                      </TouchableWithoutFeedback>
+                          <Text className="text-neutral-400 text-xs">
+                                 {person?.name}
+                              </Text>
+                      </TouchableOpacity>
                       )
                   })}
               </View>
-              </ScrollView>
             ) : (
             <View className="flex-1 justify-center items-center">
                  <Image className="h-96 w-96 rounded-full" source ={require('../images/movietime.png')}/> 
             </View>
         )}
-    </SafeAreaView>
+    </ScrollView>
+    </View>
+
   )
 }
 

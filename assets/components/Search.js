@@ -9,6 +9,15 @@ const Search = () => {
     const navigation = useNavigation();
     const [results, setresults] = useState([1,2,3,4,5,6,7,8,9,10]);
     const moviename = "The A Team ghrilrtblruiglgubrgyrgbruygb"
+
+    useEffect(() => {
+    const api_key = "fa1875db1f08a7d5f9887db721a0a94e";
+    const apiBaseUrl  =  "https://api.themoviedb.org/3"; 
+    fetch(`${apiBaseUrl}/search/movie?api_key=${api_key}`)
+    
+    }, [])
+    
+
     
   return (
     <SafeAreaView className="bg-neutral-800 flex-1">

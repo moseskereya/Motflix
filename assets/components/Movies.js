@@ -77,7 +77,7 @@ const Movies = () => {
         <SafeAreaView className={ios ? 'mbr-4' : 'mb-5'}>
             <View className="flex-row justify-between items-center mx-4">
                 <Bars3CenterLeftIcon strokeWidth={1} size={30} color="orange"/>
-                <TouchableOpacity  onPress={() => navigation.navigate('Search')}>
+                <TouchableOpacity>
                     <MagnifyingGlassCircleIcon strokeWidth={1} size={30} color="white"/>
                 </TouchableOpacity>
             </View>

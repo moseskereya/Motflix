@@ -1,9 +1,11 @@
 import React,  { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity,  Dimensions, ScrollView, Image, TouchableWithoutFeedback } from 'react-native'
 import { fallbackMoviePoster, image185 } from '../../api/movidb'
+import { useNavigation } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window')
 const movieList = ({data, title}) => {
+  const navigation = useNavigation();
   return (
     <View className="mb-8 space-y-4">
       <View className="mx-4 flex-row justify-between items-center">
@@ -15,7 +17,7 @@ const movieList = ({data, title}) => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingHorizontal: 15}}>
         {data?.map((movie, index) => {
           return (
-              <TouchableWithoutFeedback key={index}>
+              <TouchableWithoutFeedback key={index}  onPress={()=> navigation.push('Movie', movie)}>
                 <View className="space-y-2 mr-4">
                 <Image source={{uri: image185(movie.poster_path) || fallbackMoviePoster}} 
                   style={{

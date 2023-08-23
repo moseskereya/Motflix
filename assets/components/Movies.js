@@ -5,8 +5,8 @@ import { Bars3CenterLeftIcon, MagnifyingGlassCircleIcon } from "react-native-her
 const ios = Platform.ios == 'ios';
 import Trendingmovies from './trendingmovies';
 import MoviesList  from "./movieList"
-import {useNavigation } from '@react-navigation/native';
 import { fetchTopRatedMovies, fetchTrendingMovies, fetchUpcomming, fetchcomedymoviesEndpoint, fetchdocumentariemoviesEndpoint, fetchhoromoviesEndpoint, fetchromanticmoviesEndpoint } from '../../api/movidb';
+
 const Movies = () => {
     const [trending, setTrending] = useState([])
     const [upcoming, setUpcoming] = useState([])
@@ -17,19 +17,6 @@ const Movies = () => {
     const [romantic, setromantic] = useState([])
     const [documentaries, setdocumentaries] = useState([])
     
-    const navigation =  useNavigation();
-
-    useEffect(() =>{
-        getTrending();
-        getToprated();
-        getUpcomming();
-        getAction();
-        getDocumentaries();
-        getHoro();
-        getRomantic();
-        getComedy();
-    }, []);
-
     const getTrending = async () => {
         const data = await fetchTrendingMovies();
         if(data && data.results) setTrending(data.results)
@@ -68,7 +55,18 @@ const Movies = () => {
     const getDocumentaries = async () => {
         const data = await fetchdocumentariemoviesEndpoint();
         if(data && data.results) setdocumentaries(data.results)
-    }
+    } 
+
+    useEffect(() =>{
+        getTrending();
+        getToprated();
+        getUpcomming();
+        getAction();
+        getDocumentaries();
+        getHoro();
+        getRomantic();
+        getComedy();
+    }, []);
 
 
   return (

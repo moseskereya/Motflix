@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Dimensions, Image} from 'react-native'
+import { View, Text, ScrollView, Dimensions, Image, Button, Linking, TouchableOpacity} from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import React, {  useState , useEffect} from 'react'
 import Cast from "./Cast"
@@ -44,6 +44,19 @@ const Movie = () => {
 }, [itemId]);
 
 
+const OnMoviePlay = () => {
+  const youtubeUrl = `https://www.youtube.com/watch?v=${movie.videos.results[0].key}`;
+  Linking.canOpenURL(youtubeUrl)
+    .then(supported => {
+      if (supported) {
+        Linking.openURL(youtubeUrl);
+      } else {
+        console.log("Don't know how to open URL: " + youtubeUrl);
+      }
+    })
+    .catch(error => console.error('Error opening YouTube URL:', error));
+};
+
 if (!movie || casts.length === 0){
   return <Spinner/>
 }else{
@@ -56,7 +69,12 @@ if (!movie || casts.length === 0){
        <View style={{marginTop: -(height*0.09)}} className="space-y-3">
         <Text className="text-white text-center text-2xl font-bold tracking-wider">
          {movie.title}
-        </Text>
+        </Text> 
+      <TouchableOpacity>
+      <View className="m-auto space-y-5">
+        <Button color="red" title='Play' onPress={OnMoviePlay} />
+      </View>
+      </TouchableOpacity>
         <Text className="text-white font-semibold text-base text-center">{movie?.release_date}</Text>
         <View className="flex-row justify-center mx-4 space-x-2">
           {movie?.genres?.map((genre, index) =>{
@@ -64,7 +82,7 @@ if (!movie || casts.length === 0){
               <Text className="text-orange font-semibold text-base text-center" style={{color: "orange"}} key={index}>{genre.name} | </Text> 
             )
           })}
-        </View>
+        </View> 
         <Text className="text-neutral-400 tracking-wide mx-4 my-2 font-light">{movie?.overview}</Text>
        </View>
       </View>

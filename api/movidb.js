@@ -1,10 +1,9 @@
 import axios from 'axios'
 const apiKey = "fa1875db1f08a7d5f9887db721a0a94e";
 const apiBaseUrl = 'https://api.themoviedb.org/3';
-const trendingMoviesEndpoint = `${apiBaseUrl}/trending/movie/day?api_key=${apiKey}`;
+const trendingMoviesEndpoint = `${apiBaseUrl}/discover/movie?api_key=${apiKey}&with_genres=28`;
 const upcomingMoviesEndpoint = `${apiBaseUrl}/movie/upcoming?api_key=${apiKey}`;
 const topRatedMoviesEndpoint = `${apiBaseUrl}/movie/top_rated?api_key=${apiKey}`;
-const searchMoviesEndpoint = `${apiBaseUrl}/search/movie?api_key=${apiKey}`;
 const actionmoviesEndpint = `${apiBaseUrl}/discover/movie?api_key=${apiKey}&with_genres=28`;
 const comedymoviesEndpoint = `${apiBaseUrl}/discover/movie?api_key=${apiKey}&with_genres=35`; 
 const horomoviesEndpoint = `${apiBaseUrl}/discover/movie?api_key=${apiKey}&with_genres=27`;
@@ -41,6 +40,7 @@ const apiCall = async (endpoint, params)=>{
         return {};
     }
 }
+
 
 export const fetchTrendingMovies = () => {
     return apiCall (trendingMoviesEndpoint);
